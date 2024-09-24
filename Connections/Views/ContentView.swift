@@ -19,10 +19,18 @@ struct ContentView: View {
     var body: some View {
         NavigationStack {
             List(cachedUsers) { cachedUser in
-                VStack(alignment: .leading) {
-                    Text(cachedUser.name)
+                HStack {
+                    Image(systemName: "person.crop.circle.badge.fill")
+                        .symbolRenderingMode(.palette)
+                        .foregroundStyle(cachedUser.isActive ? .green : .red, .secondary)
                     
-                    Text(cachedUser.company)
+                    VStack(alignment: .leading) {
+                        Text(cachedUser.name)
+                            .font(.headline)
+                        
+                        Text(cachedUser.company)
+                            .font(.subheadline)
+                    }
                 }
             }
             .navigationTitle("Users")
