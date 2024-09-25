@@ -49,6 +49,14 @@ struct UserDetailsView: View {
                 
                 customSection(header: "ABOUT ME", text: user.about)
                 
+                Section {
+                    FriendsListView(user: user)
+                } header: {
+                    Text("FRIENDS")
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .foregroundStyle(.secondary)
+                        .padding(.top)
+                }
             }
             .padding(.horizontal)
             .navigationTitle("Details")

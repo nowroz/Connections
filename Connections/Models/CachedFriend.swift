@@ -17,3 +17,9 @@ import SwiftData
         self.name = name
     }
 }
+
+extension CachedFriend: Comparable {
+    static func <(lhs: CachedFriend, rhs: CachedFriend) -> Bool {
+        lhs.name < rhs.name
+    }
+}
