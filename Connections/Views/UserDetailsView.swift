@@ -9,6 +9,8 @@ import SwiftData
 import SwiftUI
 
 struct UserDetailsView: View {
+    @Environment(\.navigationState) private var navigationState
+    
     let user: CachedUser
     
     var body: some View {
@@ -59,9 +61,16 @@ struct UserDetailsView: View {
                 }
             }
             .padding(.horizontal)
-            .navigationTitle("Details")
-            .navigationBarTitleDisplayMode(.inline)
         }
+        .navigationTitle("Details")
+        .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            Button("Home", systemImage: "house.fill", action: gotoHome)
+        }
+    }
+    
+    private func gotoHome() {
+        navigationState.path = []
     }
     
     private func customSection(header: String, text: String) -> some View {

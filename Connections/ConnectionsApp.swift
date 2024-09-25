@@ -10,9 +10,12 @@ import SwiftUI
 
 @main
 struct ConnectionsApp: App {
+    @State private var navigationState: NavigationState = .init()
+    
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environment(\.navigationState, navigationState)
         }
         .modelContainer(for: CachedUser.self)
     }

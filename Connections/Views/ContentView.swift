@@ -10,6 +10,7 @@ import SwiftUI
 
 struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
+    @Environment(\.navigationState) private var navigationState
     
     @Query(sort: [
         SortDescriptor(\CachedUser.name),
@@ -17,7 +18,8 @@ struct ContentView: View {
     ]) private var cachedUsers: [CachedUser]
     
     var body: some View {
-        NavigationStack {
+        @Bindable var navigationState = navigationState
+        NavigationStack(path: $navigationState.path) {
             List(cachedUsers) { cachedUser in
                 NavigationLink(value: cachedUser) {
                     HStack {
