@@ -19,21 +19,26 @@ struct ContentView: View {
     var body: some View {
         NavigationStack {
             List(cachedUsers) { cachedUser in
-                HStack {
-                    Image(systemName: "person.crop.circle.badge.fill")
-                        .symbolRenderingMode(.palette)
-                        .foregroundStyle(cachedUser.isActive ? .green : .red, .secondary)
-                    
-                    VStack(alignment: .leading) {
-                        Text(cachedUser.name)
-                            .font(.headline)
+                NavigationLink(value: cachedUser) {
+                    HStack {
+                        Image(systemName: "person.crop.circle.badge.fill")
+                            .symbolRenderingMode(.palette)
+                            .foregroundStyle(cachedUser.isActive ? .green : .red, .secondary)
                         
-                        Text(cachedUser.company)
-                            .font(.subheadline)
+                        VStack(alignment: .leading) {
+                            Text(cachedUser.name)
+                                .font(.headline)
+                            
+                            Text(cachedUser.company)
+                                .font(.subheadline)
+                        }
                     }
                 }
             }
             .navigationTitle("Users")
+            .navigationDestination(for: CachedUser.self) { cachedUser in
+                UserDetailsView(user: cachedUser)
+            }
             .task {
                 await loadData()
             }
